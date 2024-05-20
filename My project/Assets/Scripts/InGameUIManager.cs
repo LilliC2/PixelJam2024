@@ -123,10 +123,14 @@ public class InGameUIManager : Singleton<InGameUIManager>
         {
             for (int s = 0; s < greenPoints_Images.Length; s++)
             {
-                if (s < _GM.playerScores[0]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
-                if (s < _GM.playerScores[1]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
-                if (s < _GM.playerScores[2]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
-                if (s < _GM.playerScores[3]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
+                if(_GM.playerScores.Count >= 1)
+                    if (s < _GM.playerScores[0]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
+                if (_GM.playerScores.Count >= 2)
+                    if (s < _GM.playerScores[1]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
+                if (_GM.playerScores.Count >= 3)
+                    if (s < _GM.playerScores[2]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
+                if (_GM.playerScores.Count >= 4)
+                    if (s < _GM.playerScores[3]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
 
             }
 
