@@ -82,7 +82,7 @@ public class GameManager : Singleton<GameManager>
     {
         int pNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
-        var spawnPoint = spawnpoints[Random.Range(0, 3)];
+        var spawnPoint = spawnpoints[pNum];
         var playerObj = PhotonNetwork.Instantiate(playerPrefabs[pNum].name, spawnPoint.transform.position, Quaternion.identity);
         playerObj.GetComponent<PlayerController>().playerIndex = pNum;
 
