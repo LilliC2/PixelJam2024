@@ -41,6 +41,15 @@ public class GameManager : Singleton<GameManager>
 
     public int winnerIndex;
 
+
+    float minX = -18;
+    float maxX = 18;
+    float minZ = -18;
+    float maxZ = 18;
+    float minSeconds = 5;
+    float maxSeconds = 15;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +71,12 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(_InGameUI.Countdown());
     }
 
+    Vector3 RandomPosInGameSpace()
+    {
+        Vector3 position = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
+        return position;
+
+    }
 
     void CreatePlayer()
     {
@@ -94,10 +109,9 @@ public class GameManager : Singleton<GameManager>
         {
             ResetPlayer(playerGameObjList[i]);
             playerGameObjList[i].GetComponent<CharacterController>().enabled = false;
-            var spawnPoint = spawnpoints[i];
 
             playerGameObjList[i].GetComponent<PlayerController>().isDead = false;
-            playerGameObjList[i].transform.position = spawnPoint.transform.position;
+            playerGameObjList[i].transform.position = RandomPosInGameSpace();
             runEndOfRound = false;
             playerGameObjList[i].GetComponent<CharacterController>().enabled = true;
         }
@@ -141,7 +155,12 @@ public class GameManager : Singleton<GameManager>
         bool isGameWon = false;
         for (int i = 0; i < playerScores.Count; i++)
         {
-            if (playerScores[i] == 5) isGameWon = true;
+            if (playerScores[i] == 5)
+            {
+                winnerIndex = i;
+                isGameWon = true;
+            }
+
         }
 
         return isGameWon;
@@ -149,21 +168,6 @@ public class GameManager : Singleton<GameManager>
 
     public void WinnerLoad()
     {
-        bool foundWinner = false;
-        if(foundWinner == false)
-        {
-            for (int i = 0; i < playerScores.Count; i++)
-            {
-                if (playerScores[i] == 5)
-                {
-                    winnerIndex = i;
-                    foundWinner = true;
-
-                }
-            }
-        }
-
-
         PhotonNetwork.LoadLevel("WinScene"); //use when loading multiplayer scene
     }
 

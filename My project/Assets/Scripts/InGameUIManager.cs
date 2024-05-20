@@ -64,7 +64,7 @@ public class InGameUIManager : Singleton<InGameUIManager>
         if(_GM.gameState == GameManager.GameState.BetweenRounds || _GM.gameState == GameManager.GameState.Loading)
         {
             print("countdown");
-            countdownGO.SetActive(true);
+            if (countdownGO != null) countdownGO.SetActive(true);
             countdownText.text = "3";
             yield return new WaitForSeconds(1);
             countdownText.text = "2";
@@ -77,10 +77,11 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
             yield return new WaitForSeconds(1);
             _GM.gameState = GameManager.GameState.Playing;
-            countdownGO.SetActive(false);
+            if(countdownGO != null) countdownGO.SetActive(false);
+
         }
 
-  
+
 
 
     }
