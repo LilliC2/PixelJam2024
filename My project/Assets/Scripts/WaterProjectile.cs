@@ -27,6 +27,8 @@ public class WaterProjectile : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print(parent.name);
+
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         rb.AddForce(transform.forward * speed);
@@ -63,8 +65,7 @@ public class WaterProjectile : GameBehaviour
 
         if(collision.gameObject.CompareTag("Player"))
         {
-            print(parent.name);
-            if(collision.gameObject.transform.root.gameObject != parent)
+            if(collision.gameObject.transform.gameObject != parent)
             {
 
 
