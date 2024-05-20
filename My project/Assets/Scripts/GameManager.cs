@@ -88,18 +88,16 @@ public class GameManager : Singleton<GameManager>
     void ResetForNewRound()
     {
 
-        FindSpawnPoints();
         print("new round");
         foreach (var player in playerGameObjList)
         {
 
             ResetPlayer(player);
             player.GetComponent<CharacterController>().enabled = false;
-            var spawnPoint = spawnpoints[Random.Range(0, 3)];
+            var spawnPoint = spawnpoints[playerGameObjList.IndexOf(player)];
 
             player.GetComponent<PlayerController>().isDead = false;
             player.transform.position = spawnPoint.transform.position;
-            spawnpoints.Remove(spawnPoint);
             runEndOfRound = false;
             player.GetComponent<CharacterController>().enabled = true;
             player.GetComponentInChildren<Animator>().SetBool("Dead", false);

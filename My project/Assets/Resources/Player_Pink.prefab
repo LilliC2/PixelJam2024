@@ -300,6 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 0
   speed: 10
+  isDead: 0
   isInReloadZone: 0
   ammoImages:
   - {fileID: 8778555741014088549}
@@ -400,7 +401,7 @@ MonoBehaviour:
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
