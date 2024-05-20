@@ -742,7 +742,7 @@ MonoBehaviour:
   maxAmmo: 3
   currentAmmo: 3
   projectileCooldownTime: 1
-  projectileForce: 5000
+  projectileForce: 2500
   deathAudio: {fileID: 9008898609956826022}
   reloadAudio: {fileID: 2927792114273183256}
   shootAudio: {fileID: 4536888006216609401}

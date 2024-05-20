@@ -233,7 +233,7 @@ public class PlayerController : GameBehaviour
 
         Quaternion quaternion = new Quaternion(gameObject.transform.forward.x, gameObject.transform.forward.y, gameObject.transform.forward.z, 0);
 
-        shootManager.GetComponent<PhotonView>().RPC("SpawnBullet", RpcTarget.All, quaternion,firingPoint.transform.position, playerIndex);
+        shootManager.GetComponent<PhotonView>().RPC("SpawnBullet", RpcTarget.All, quaternion,firingPoint.transform.position, _GM.playerGameObjList.IndexOf(gameObject));
 
         gameObject.transform.LookAt(new Vector3(mousePos.x, 0, mousePos.z));
         firingPoint.transform.LookAt(new Vector3(mousePos.x, 0, mousePos.z));

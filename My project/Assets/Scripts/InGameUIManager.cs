@@ -61,7 +61,7 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
     public IEnumerator Countdown()
     {
-        if(_GM.gameState == GameManager.GameState.BetweenRounds)
+        if(_GM.gameState == GameManager.GameState.BetweenRounds || _GM.gameState == GameManager.GameState.Loading)
         {
             print("countdown");
             countdownGO.SetActive(true);
