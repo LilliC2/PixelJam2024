@@ -89,21 +89,19 @@ public class GameManager : Singleton<GameManager>
     {
 
         print("new round");
-        foreach (var player in playerGameObjList)
+
+        for (int i = 0; i < playerGameObjList.Count; i++)
         {
+            ResetPlayer(playerGameObjList[i]);
+            playerGameObjList[i].GetComponent<CharacterController>().enabled = false;
+            var spawnPoint = spawnpoints[i];
 
-            ResetPlayer(player);
-            player.GetComponent<CharacterController>().enabled = false;
-            var spawnPoint = spawnpoints[playerGameObjList.IndexOf(player)];
-
-            player.GetComponent<PlayerController>().isDead = false;
-            player.transform.position = spawnPoint.transform.position;
+            playerGameObjList[i].GetComponent<PlayerController>().isDead = false;
+            playerGameObjList[i].transform.position = spawnPoint.transform.position;
             runEndOfRound = false;
-            player.GetComponent<CharacterController>().enabled = true;
-            player.GetComponentInChildren<Animator>().SetBool("Dead", false);
-
-
+            playerGameObjList[i].GetComponent<CharacterController>().enabled = true;
         }
+
 
         StartCoroutine(_InGameUI.Countdown());
 
@@ -116,6 +114,8 @@ public class GameManager : Singleton<GameManager>
 
         print("reset player");
         script.state = PlayerState.Alive;
+        player.GetPhotonView().RPC("Alive", RpcTarget.All);
+
         player.SetActive(true);
         script.currentAmmo = 3;
         script.UpdateGunAmmoVisuals();

@@ -306,7 +306,14 @@ public class PlayerController : GameBehaviour
         }
 
     }
-    
+
+
+    [PunRPC]
+    public void Alive()
+    {
+        anim.SetBool("Dead", false);
+
+    }
 
 
     Vector3 IsoVectorConvert(Vector3 vector)

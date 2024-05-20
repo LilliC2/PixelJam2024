@@ -741,6 +741,7 @@ MonoBehaviour:
   dashDuration: 0.1
   maxAmmo: 3
   currentAmmo: 3
+  isProjectileOnCooldown: 0
   projectileCooldownTime: 1
   projectileForce: 2500
   deathAudio: {fileID: 9008898609956826022}
