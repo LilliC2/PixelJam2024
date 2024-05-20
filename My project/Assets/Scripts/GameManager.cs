@@ -49,6 +49,13 @@ public class GameManager : Singleton<GameManager>
         FindSpawnPoints();
         CreatePlayer();
 
+        var player = FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
+
+        foreach (var obj in player)
+        {
+            playerGameObjList.Add(obj.gameObject);
+        }
+
         endGame.AddListener(WinnerLoad);
 
         StartCoroutine(_InGameUI.Countdown());
@@ -63,7 +70,6 @@ public class GameManager : Singleton<GameManager>
         var playerObj = PhotonNetwork.Instantiate(playerPrefabs[pNum].name, spawnPoint.transform.position, Quaternion.identity);
         playerObj.GetComponent<PlayerController>().playerIndex = pNum;
 
-        playerGameObjList.Add(playerObj);
         playerScores.Add(0);
         alivePlayers.Add(playerObj);
         spawnpoints.Remove(spawnPoint);
