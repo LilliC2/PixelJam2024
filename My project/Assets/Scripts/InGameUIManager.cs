@@ -119,22 +119,20 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
     public void UpdateScoreboard()
     {
-        for (int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount; i++)
+        for (int i = 0; i < _GM.playerGameObjList.Count; i++)
         {
-            for (int s = 0; s < greenPoints_Images.Length; s++)
+            //check that
+            for (int j = 0; j < _GM.playerScores[i]; j++)
             {
-                if(_GM.playerScores.Count >= 1)
-                    if (s < _GM.playerScores[0]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
-                if (_GM.playerScores.Count >= 2)
-                    if (s < _GM.playerScores[1]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
-                if (_GM.playerScores.Count >= 3)
-                    if (s < _GM.playerScores[2]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
-                if (_GM.playerScores.Count >= 4)
-                    if (s < _GM.playerScores[3]) greenPoints_Images[s].sprite = fullPointBall_sprites[i];
-
+                if(i==0) greenPoints_Images[j].sprite = fullPointBall_sprites[i];
+                if(i==1) bluePoints_Images[j].sprite = fullPointBall_sprites[i];
+                if(i==2) pinkPoints_Images[j].sprite = fullPointBall_sprites[i];
+                if(i==3) orangePoints_Images[j].sprite = fullPointBall_sprites[i];
             }
-
         }
+
+
+
 
     }
 
