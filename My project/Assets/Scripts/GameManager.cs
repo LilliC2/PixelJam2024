@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using System.Linq;
 using Photon.Realtime;
 using static PlayerController;
+using NUnit.Framework;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -125,6 +126,8 @@ public class GameManager : Singleton<GameManager>
 
     void UpdateScore()
     {
+        if (playerScores.Count != playerGameObjList.Count) playerScores = new List<int>(new int[playerGameObjList.Count]);
+
         int index = 0;
         if (alivePlayers.Count == 1)
         {
