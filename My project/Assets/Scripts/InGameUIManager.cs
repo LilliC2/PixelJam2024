@@ -110,7 +110,7 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
         foreach (var player in _GM.playerGameObjList)
         {
-            player.GetComponent<Animator>().SetBool("Dead", false);
+            player.GetComponentInChildren<Animator>().SetBool("Dead", false);
         }
 
 
