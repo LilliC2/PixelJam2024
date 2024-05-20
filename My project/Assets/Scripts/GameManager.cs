@@ -49,6 +49,7 @@ public class GameManager : Singleton<GameManager>
         FindSpawnPoints();
         CreatePlayer();
 
+        endGame.AddListener(WinnerLoad);
 
         StartCoroutine(_InGameUI.Countdown());
     }
@@ -89,10 +90,13 @@ public class GameManager : Singleton<GameManager>
             player.GetComponent<CharacterController>().enabled = false;
             var spawnPoint = spawnpoints[Random.Range(0, 3)];
 
+            player.GetComponent<PlayerController>().isDead = false;
             player.transform.position = spawnPoint.transform.position;
             spawnpoints.Remove(spawnPoint);
             runEndOfRound = false;
             player.GetComponent<CharacterController>().enabled = true;
+            player.GetComponentInChildren<Animator>().SetBool("Dead", false);
+
 
         }
 

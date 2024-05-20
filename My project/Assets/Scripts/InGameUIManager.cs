@@ -100,7 +100,7 @@ public class InGameUIManager : Singleton<InGameUIManager>
         ExecuteAfterSeconds(1, () => pointPanel.transform.DOMove(panelBeforePos.transform.position,0.1f).SetEase(panelEase));
         ExecuteAfterSeconds(1.3F, () => UpdateScoreboard());
 
-        _AM.WinRoundAudio();
+        ExecuteAfterSeconds(1.3F, () => _AM.WinRoundAudio());
 
         if(!_GM.CheckForWinner())
         {

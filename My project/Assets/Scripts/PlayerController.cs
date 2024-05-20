@@ -18,7 +18,7 @@ public class PlayerController : GameBehaviour
     Animator anim;
 
     [SerializeField] float speed;
-    bool isDead;
+    public bool isDead;
 
     public bool isInReloadZone;
     bool isReloading;
@@ -230,7 +230,7 @@ public class PlayerController : GameBehaviour
 
         Quaternion quaternion = new Quaternion(gameObject.transform.forward.x, gameObject.transform.forward.y, gameObject.transform.forward.z, 0);
 
-        shootManager.GetComponent<PhotonView>().RPC("SpawnBullet", RpcTarget.All, quaternion, firingPoint.transform.position, gameObject);
+        shootManager.GetComponent<PhotonView>().RPC("SpawnBullet", RpcTarget.All, quaternion,firingPoint.transform.position, playerIndex);
 
         gameObject.transform.LookAt(new Vector3(mousePos.x, 0, mousePos.z));
         firingPoint.transform.LookAt(new Vector3(mousePos.x, 0, mousePos.z));
@@ -302,7 +302,12 @@ public class PlayerController : GameBehaviour
 
             deathAudio.Play();
             state = PlayerState.Dead;
-            anim.SetTrigger("Dead");
+            if(!isDead)
+            {
+                isDead = true;
+                anim.SetBool("Dead", true);
+
+            }
             _GM.CheckForEndOfRound();
             ExecuteAfterSeconds(1, () => gameObject.SetActive(false));
 

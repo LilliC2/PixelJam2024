@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 
-public class ShootManager : MonoBehaviourPunCallbacks
+public class ShootManager : GameBehaviour
 {
     public bool isShootButtonPressed;
 
@@ -19,12 +19,12 @@ public class ShootManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void SpawnBullet(Quaternion playerQuaternion, Vector3 firingPoint, GameObject player)
+    public void SpawnBullet(Quaternion playerQuaternion, Vector3 firingPoint, int playerIndex)
     {
         var bullet = Instantiate(projectile, firingPoint, playerQuaternion);
 
         bullet.GetComponent<Rigidbody>().AddForce(new Vector3(playerQuaternion.x,playerQuaternion.y,playerQuaternion.z) * projectileForce);
 
-        bullet.GetComponent<WaterProjectile>().parent = player;
+        bullet.GetComponent<WaterProjectile>().parent = _GM.playerGameObjList[playerIndex];
     }
 }

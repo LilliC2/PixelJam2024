@@ -30,7 +30,7 @@ public class EndGameUIManager : GameBehaviour
         if (PhotonNetwork.IsMasterClient)
         { 
             hostPanel.SetActive(true);
-            guestPanel.SetActive(true);
+            guestPanel.SetActive(false);
         } 
         else
         {
@@ -62,9 +62,15 @@ public class EndGameUIManager : GameBehaviour
 
     public void ReturnToLobby()
     {
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LeaveRoom(false);
+
+    }
+
+    public override void OnLeftRoom()
+    {
         SceneManager.LoadScene("Lobby");
 
+        base.OnLeftRoom();
     }
 
     public void CallCoundownButton()
