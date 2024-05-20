@@ -42,21 +42,26 @@ public class EndGameUIManager : GameBehaviour
         UpdateWinner(_GM.winnerIndex);
     }
 
+    [PunRPC]
     public void UpdateWinner(int winnderIndex)
     {
-        for (int i = 0; i < winnerHeads.Length; i++)
+        if (PhotonNetwork.IsMasterClient)
         {
-            if (i == winnderIndex)
+            for (int i = 0; i < winnerHeads.Length; i++)
             {
-                winnerHeads[i].gameObject.SetActive(true);
-                loserBodies[i].gameObject.SetActive(false);
-            }
-            else
-            {
-                winnerHeads[i].gameObject.SetActive(false);
-                loserBodies[i].gameObject.SetActive(true);
+                if (i == winnderIndex)
+                {
+                    winnerHeads[i].gameObject.SetActive(true);
+                    loserBodies[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    winnerHeads[i].gameObject.SetActive(false);
+                    loserBodies[i].gameObject.SetActive(true);
+                }
             }
         }
+
     }
 
 

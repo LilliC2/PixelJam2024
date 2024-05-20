@@ -90,6 +90,7 @@ public class PlayerController : GameBehaviour
 
             if(state == PlayerState.Alive && _GM.gameState == GameManager.GameState.Playing)
             {
+                anim.SetBool("Dead", false);
 
 
 
@@ -241,19 +242,6 @@ public class PlayerController : GameBehaviour
         currentAmmo--;
         UpdateGunAmmoVisuals();
 
-
-        //Ray ray = new Ray(firingPoint.transform.position, transform.forward);
-
-        //RaycastHit hit;
-
-        //if (Physics.Raycast(ray.origin, ray.direction, out hit, 100))
-        //{
-        //    if (hit.transform.gameObject.GetComponent<PlayerController>())
-        //    {
-        //        hit.transform.gameObject.GetComponent<PhotonView>().RPC("Die", RpcTarget.All);
-        //    }
-
-        //}
 
 
 
