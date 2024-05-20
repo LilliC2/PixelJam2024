@@ -64,6 +64,9 @@ public class PlayerController : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(!_GM.playerGameObjList.Contains(gameObject)) _GM.playerGameObjList.Add(gameObject);
+        if(!_GM.alivePlayers.Contains(gameObject)) _GM.alivePlayers.Add(gameObject);
+
         currentAmmo = 3;
         UpdateGunAmmoVisuals();
         isReloading = false;
