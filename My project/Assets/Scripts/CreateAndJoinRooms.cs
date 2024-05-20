@@ -6,8 +6,12 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 
-public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
+public class CreateAndJoinRooms : GameBehaviour
 {
+    [SerializeField] Sprite[] audio_sprites;
+    [SerializeField] Image audioImage;
+    bool isMuted = false;
+
     public TMP_InputField createInput;
     public TMP_InputField joinInput;
 
@@ -112,8 +116,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         guestWait.SetActive(true);
         print("update text");
         playerConnectGuest.text = PhotonNetwork.CurrentRoom.PlayerCount + "/4 players connected";
-        playerVisualsHost[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetActive(true);
-        playerVisualsHost[0].SetActive(true);
+        playerVisualsGuest[PhotonNetwork.CurrentRoom.PlayerCount - 1].SetActive(true);
+        playerVisualsGuest[0].SetActive(true);
 
 
     }
@@ -139,5 +143,21 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         playerVisualsGuest[PhotonNetwork.CurrentRoom.PlayerCount].SetActive(false);
     }
 
+        public void MuteAudio()
+    {
+        isMuted = !isMuted;
+
+
+        if(isMuted)
+        {
+                audioImage.sprite = audio_sprites[0];
+                _AM.audioMixerVolumeController.SetFloat("MasterAudio", -80);
+        }
+        else
+        {
+            audioImage.sprite = audio_sprites[1];
+                _AM.audioMixerVolumeController.SetFloat("MasterAudio", -0.04f);
+        }
+    }
 
 }

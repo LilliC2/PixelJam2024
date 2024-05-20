@@ -10,6 +10,8 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static GameManager _GM { get { return GameManager.INSTANCE; } }
     protected static InGameUIManager _InGameUI { get { return InGameUIManager.INSTANCE; } }
 
+    protected static AudioManager _AM { get { return AudioManager.INSTANCE; } }
+
 
 
 }

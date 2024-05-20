@@ -50,6 +50,13 @@ public class PlayerController : GameBehaviour
 
     bool isShootButtonPressed = false;
 
+    [SerializeField] AudioSource deathAudio;
+    [SerializeField] AudioSource reloadAudio;
+    [SerializeField] AudioSource shootAudio;
+
+    [SerializeField] AudioSource dashAudio;
+
+
 
     public enum PlayerState { Alive, Dead}
     public PlayerState state;   
@@ -112,7 +119,7 @@ public class PlayerController : GameBehaviour
                     if (!isDashOnCooldown)
                     {
                         isDashing = true;
-
+                        dashAudio.Play();
                         ExecuteAfterSeconds(dashCooldownTime, () => isDashOnCooldown = false);
                         ExecuteAfterSeconds(dashDuration, () => isDashing = false);
 
@@ -156,7 +163,7 @@ public class PlayerController : GameBehaviour
                     if (currentAmmo > 0 && !isProjectileOnCooldown)
                     {
                         isProjectileOnCooldown = true;
-
+                        shootAudio.Play();
                         gameObject.transform.LookAt(new Vector3(mousePos.x, 0, mousePos.z));
                         firingPoint.transform.LookAt(new Vector3(mousePos.x, 0, mousePos.z));
 
@@ -202,7 +209,7 @@ public class PlayerController : GameBehaviour
             currentAmmo++;
             UpdateGunAmmoVisuals();
 
-
+            reloadAudio.Play();
 
             yield return new WaitForSeconds(reloadSpeed);
             StartCoroutine(Reload());
@@ -293,7 +300,7 @@ public class PlayerController : GameBehaviour
         {
             _GM.alivePlayers.Remove(gameObject);
 
-
+            deathAudio.Play();
             state = PlayerState.Dead;
             anim.SetTrigger("Dead");
             _GM.CheckForEndOfRound();
@@ -314,12 +321,6 @@ public class PlayerController : GameBehaviour
         return result;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Projectile"))
-        {
-           
-        }
-    }
+
 
 }

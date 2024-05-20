@@ -18,7 +18,9 @@ public class EndGameUIManager : GameBehaviour
     [SerializeField] GameObject[] winnerHeads;
     [SerializeField] GameObject[] loserBodies;
 
-
+   [SerializeField] Sprite[] audio_sprites;
+    [SerializeField] Image audioImage;
+    bool isMuted = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -86,6 +88,23 @@ public class EndGameUIManager : GameBehaviour
 
 
         if (PhotonNetwork.IsMasterClient) {RestartGame();} 
+    }
+
+            public void MuteAudio()
+    {
+        isMuted = !isMuted;
+
+
+        if(isMuted)
+        {
+                audioImage.sprite = audio_sprites[0];
+                _AM.audioMixerVolumeController.SetFloat("MasterAudio", -80);
+        }
+        else
+        {
+            audioImage.sprite = audio_sprites[1];
+                _AM.audioMixerVolumeController.SetFloat("MasterAudio", -0.04f);
+        }
     }
 
 }

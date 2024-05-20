@@ -15,6 +15,8 @@ public class WaterProjectile : GameBehaviour
 
     [SerializeField] GameObject reloadzone;
 
+    [SerializeField] AudioSource[] hit;
+
     public void PopParticle()
     {
         popPS.Play();
@@ -36,7 +38,7 @@ public class WaterProjectile : GameBehaviour
         rb.angularVelocity = Vector3.zero;
 
         _GM.shootManager.GetComponent<PhotonView>().RPC("SpawnReloadPuddle", RpcTarget.All, transform.position);
-
+        hit[Random.Range(0, hit.Length)].Play();
        
         ExecuteAfterFrames(10,() =>  anim.SetTrigger("Pop"));
         ExecuteAfterSeconds(0.75f,() =>  Destroy(gameObject));

@@ -9,8 +9,11 @@ public class InGameUIManager : Singleton<InGameUIManager>
 {
     [SerializeField] GameObject[] playerPointPanels;
 
-    [SerializeField] Sprite[] fullPointBall_sprites;
 
+    [SerializeField] Sprite[] fullPointBall_sprites;
+    [SerializeField] Sprite[] audio_sprites;
+    [SerializeField] Image audioImage;
+    bool isMuted = false;
     [SerializeField] Image[] greenPoints_Images;
     [SerializeField] Image[] bluePoints_Images;
     [SerializeField] Image[] pinkPoints_Images;
@@ -36,6 +39,23 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
         pointPanel.transform.position = panelAfterPos.transform.position;
         //turn off points for players that arent in game
+    }
+
+    public void MuteAudio()
+    {
+        isMuted = !isMuted;
+
+
+        if(isMuted)
+        {
+                audioImage.sprite = audio_sprites[0];
+                _AM.audioMixerVolumeController.SetFloat("MasterAudio", -80);
+        }
+        else
+        {
+            audioImage.sprite = audio_sprites[1];
+                _AM.audioMixerVolumeController.SetFloat("MasterAudio", -0.04f);
+        }
     }
 
 
@@ -79,6 +99,8 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
         ExecuteAfterSeconds(1, () => pointPanel.transform.DOMove(panelBeforePos.transform.position,0.1f).SetEase(panelEase));
         ExecuteAfterSeconds(1.3F, () => UpdateScoreboard());
+
+        _AM.WinRoundAudio();
 
         if(!_GM.CheckForWinner())
         {

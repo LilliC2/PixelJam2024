@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
 
     public ShootManager shootManager;
 
-    public enum GameState { Playing, Loading, Win, BetweenRounds}
+    public enum GameState { Playing, Loading, Win, BetweenRounds, PlayerDisconnected}
     public GameState gameState;
 
     ShootManager shotManager;
