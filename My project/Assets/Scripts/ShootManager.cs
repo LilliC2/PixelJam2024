@@ -21,10 +21,14 @@ public class ShootManager : GameBehaviour
     [PunRPC]
     public void SpawnBullet(Quaternion playerQuaternion, Vector3 firingPoint, int playerIndex)
     {
-        var bullet = Instantiate(projectile, firingPoint, playerQuaternion);
+        if(_GM.playerGameObjList[playerIndex].GetComponent<PlayerController>().isProjectileOnCooldown)
+        {
+            var bullet = Instantiate(projectile, firingPoint, playerQuaternion);
 
-        bullet.GetComponent<Rigidbody>().AddForce(new Vector3(playerQuaternion.x,playerQuaternion.y,playerQuaternion.z) * projectileForce);
+            bullet.GetComponent<Rigidbody>().AddForce(new Vector3(playerQuaternion.x, playerQuaternion.y, playerQuaternion.z) * projectileForce);
 
-        bullet.GetComponent<WaterProjectile>().parent = _GM.playerGameObjList[playerIndex];
+            bullet.GetComponent<WaterProjectile>().parent = _GM.playerGameObjList[playerIndex];
+        }
+
     }
 }

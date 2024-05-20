@@ -41,7 +41,7 @@ public class PlayerController : GameBehaviour
 
     [SerializeField] int maxAmmo;
     public int currentAmmo;
-    bool isProjectileOnCooldown;
+    public bool isProjectileOnCooldown;
     [SerializeField] float projectileCooldownTime;
     [SerializeField] float projectileForce;
 
