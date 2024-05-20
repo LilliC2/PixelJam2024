@@ -38,8 +38,8 @@ public class EndGameUIManager : GameBehaviour
             hostPanel.SetActive(false);
         }
 
+        gameObject.GetComponent<PhotonView>().RPC("UpdateWinner", RpcTarget.All,_GM.winnerIndex);
 
-        UpdateWinner(_GM.winnerIndex);
     }
 
     [PunRPC]

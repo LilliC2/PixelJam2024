@@ -74,8 +74,6 @@ public class CreateAndJoinRooms : GameBehaviour
         if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
         {
             needMorePlayersText.SetActive(true);
-            PhotonNetwork.LoadLevel("GameScene"); //ONLY FOR TESTING
-
 
         }
         else

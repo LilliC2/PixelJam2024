@@ -83,8 +83,6 @@ public class PlayerController : GameBehaviour
     void Update()
     {
 
-        if(Input.GetKey(KeyCode.O)) { Die(); }
-
         if(view.IsMine)
         {
 

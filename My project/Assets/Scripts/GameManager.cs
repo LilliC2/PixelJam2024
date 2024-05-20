@@ -133,6 +133,7 @@ public class GameManager : Singleton<GameManager>
         player.SetActive(true);
         script.currentAmmo = 3;
         script.UpdateGunAmmoVisuals();
+        player.GetComponent<Animator>().SetBool("Dead", false);
         if (!_GM.alivePlayers.Contains(player)) _GM.alivePlayers.Add(player);
     }
 
