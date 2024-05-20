@@ -110,19 +110,18 @@ public class GameManager : Singleton<GameManager>
         player.SetActive(true);
         script.currentAmmo = 3;
         script.UpdateGunAmmoVisuals();
-        if (!_GM.alivePlayers.Contains(gameObject)) _GM.alivePlayers.Add(gameObject);
+        if (!_GM.alivePlayers.Contains(player)) _GM.alivePlayers.Add(player);
     }
 
     void UpdateScore()
     {
         int index = 0;
-        if (alivePlayers.Count > 0)
+        if (alivePlayers.Count == 1)
         {
             index = alivePlayers[0].GetComponent<PlayerController>().playerIndex;
 
         }
-
-
+         
         playerScores[index]++;
     }
 

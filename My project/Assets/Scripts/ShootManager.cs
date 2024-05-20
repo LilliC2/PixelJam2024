@@ -14,14 +14,17 @@ public class ShootManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SpawnReloadPuddle(Vector3 pos)
     {
-        Instantiate(reloadzone, pos, Quaternion.identity);
+        Vector3 newPos = new Vector3(pos.x, 0.49f, pos.z);
+        Instantiate(reloadzone, newPos, Quaternion.identity);
     }
 
     [PunRPC]
-    public void SpawnBullet(Quaternion player, Vector3 firingPoint)
+    public void SpawnBullet(Quaternion playerQuaternion, Vector3 firingPoint, GameObject player)
     {
-        var bullet = Instantiate(projectile, firingPoint, player);
+        var bullet = Instantiate(projectile, firingPoint, playerQuaternion);
 
-        bullet.GetComponent<Rigidbody>().AddForce(new Vector3(player.x,player.y,player.z) * projectileForce);
+        bullet.GetComponent<Rigidbody>().AddForce(new Vector3(playerQuaternion.x,playerQuaternion.y,playerQuaternion.z) * projectileForce);
+
+        bullet.GetComponent<WaterProjectile>().parent = player;
     }
 }

@@ -11,6 +11,9 @@ public class WaterProjectile : GameBehaviour
     Animator anim;
     bool isMoving;
     bool destroy;
+
+    public GameObject parent;
+
     [SerializeField] ParticleSystem popPS;
 
     [SerializeField] GameObject reloadzone;
@@ -60,13 +63,17 @@ public class WaterProjectile : GameBehaviour
 
         if(collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PhotonView>().RPC("Die", RpcTarget.All);
-            if (!destroy)
+            if(collision.gameObject != parent)
             {
-                destroy = true;
-                DestroyProjectile();
+                collision.gameObject.GetComponent<PhotonView>().RPC("Die", RpcTarget.All);
+                if (!destroy)
+                {
+                    destroy = true;
+                    DestroyProjectile();
 
+                }
             }
+      
         }
 
     }
