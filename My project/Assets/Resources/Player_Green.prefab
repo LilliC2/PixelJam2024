@@ -1459,7 +1459,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Shoot
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Dead
   m_SynchronizeLayers:
   - SynchronizeType: 0

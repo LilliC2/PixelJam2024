@@ -108,6 +108,12 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
         ExecuteAfterSeconds(1.3F, () => _AM.WinRoundAudio());
 
+        foreach (var player in _GM.playerGameObjList)
+        {
+            player.GetComponent<Animator>().SetBool("Dead", false);
+        }
+
+
         if(!_GM.CheckForWinner())
         {
             print("start new round");

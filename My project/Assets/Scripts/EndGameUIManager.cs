@@ -45,20 +45,17 @@ public class EndGameUIManager : GameBehaviour
     [PunRPC]
     public void UpdateWinner(int winnderIndex)
     {
-        if (PhotonNetwork.IsMasterClient)
+        for (int i = 0; i < winnerHeads.Length; i++)
         {
-            for (int i = 0; i < winnerHeads.Length; i++)
+            if (i == winnderIndex)
             {
-                if (i == winnderIndex)
-                {
-                    winnerHeads[i].gameObject.SetActive(true);
-                    loserBodies[i].gameObject.SetActive(false);
-                }
-                else
-                {
-                    winnerHeads[i].gameObject.SetActive(false);
-                    loserBodies[i].gameObject.SetActive(true);
-                }
+                winnerHeads[i].gameObject.SetActive(true);
+                loserBodies[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                winnerHeads[i].gameObject.SetActive(false);
+                loserBodies[i].gameObject.SetActive(true);
             }
         }
 

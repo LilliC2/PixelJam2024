@@ -318,6 +318,7 @@ MonoBehaviour:
   dashDuration: 0.1
   maxAmmo: 3
   currentAmmo: 3
+  isProjectileOnCooldown: 0
   projectileCooldownTime: 1
   projectileForce: 2500
   deathAudio: {fileID: 3416883179253882215}
@@ -1306,7 +1307,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Shoot
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Dead
   m_SynchronizeLayers:
   - SynchronizeType: 0
