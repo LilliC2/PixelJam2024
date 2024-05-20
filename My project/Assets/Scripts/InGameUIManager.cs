@@ -61,21 +61,26 @@ public class InGameUIManager : Singleton<InGameUIManager>
 
     public IEnumerator Countdown()
     {
-        print("countdown");
-        countdownGO.SetActive(true);
-        countdownText.text = "3";
-        yield return new WaitForSeconds(1);
-        countdownText.text = "2";
+        if(_GM.gameState == GameManager.GameState.BetweenRounds)
+        {
+            print("countdown");
+            countdownGO.SetActive(true);
+            countdownText.text = "3";
+            yield return new WaitForSeconds(1);
+            countdownText.text = "2";
 
-        yield return new WaitForSeconds(1);
-        countdownText.text = "1";
+            yield return new WaitForSeconds(1);
+            countdownText.text = "1";
 
-        yield return new WaitForSeconds(1);
-        countdownText.text = "GO!";
+            yield return new WaitForSeconds(1);
+            countdownText.text = "GO!";
 
-        yield return new WaitForSeconds(1);
-        _GM.gameState = GameManager.GameState.Playing;
-        countdownGO.SetActive(false);
+            yield return new WaitForSeconds(1);
+            _GM.gameState = GameManager.GameState.Playing;
+            countdownGO.SetActive(false);
+        }
+
+  
 
 
     }

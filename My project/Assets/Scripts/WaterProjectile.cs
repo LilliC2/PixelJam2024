@@ -63,8 +63,11 @@ public class WaterProjectile : GameBehaviour
 
         if(collision.gameObject.CompareTag("Player"))
         {
-            if(collision.gameObject != parent)
+            print(parent.name);
+            if(collision.gameObject.transform.root.gameObject != parent)
             {
+
+
                 collision.gameObject.GetComponent<PhotonView>().RPC("Die", RpcTarget.All);
                 if (!destroy)
                 {
